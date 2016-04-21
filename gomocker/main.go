@@ -4,7 +4,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"gomocker/utils"
+	"gomocker/gomocker/utils"
 	"log"
 	"net/http"
 )
