@@ -1,0 +1,16 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+   <S:Body>
+      <setApplicationResponse xmlns="urn://x-artefacts-it-ru/dob/poltava/application/types/1.0" xmlns:ns2="urn://x-artefacts-it-ru/dob/poltava/common-types/1.5">
+         <applicationID>72938855-8345-44fa-81d6-7ab93a718787</applicationID>
+         <applicantID>
+            <ns2:personID>c3c648b8-a426-46c4-af49-e91277f6e209</ns2:personID>
+         </applicantID>
+         <applicationState>
+            <applicationStateTransitionID>8</applicationStateTransitionID>
+            <applicationStateName>Заявка оформлена и принята на рассмотрение</applicationStateName>
+            <applicationStateTransitionTimestamp>2016-02-05T14:26:02.440+04:00</applicationStateTransitionTimestamp>
+         </applicationState>
+         <applicationContentID>80819aab-5f0f-49d1-95c1-2dc3baf02d9b</applicationContentID>
+      </setApplicationResponse>
+   </S:Body>
+</S:Envelope>
