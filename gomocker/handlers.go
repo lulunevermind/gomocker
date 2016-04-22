@@ -8,8 +8,6 @@ import (
 	"net/http/httputil"
 	"strings"
 	"time"
-
-	"github.com/kylewolfe/simplexml"
 )
 
 func handleGet(w http.ResponseWriter, r *http.Request) {
@@ -21,10 +19,21 @@ func handleGet(w http.ResponseWriter, r *http.Request) {
 
 func handleMvd1(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
-
 		body := readBodyAsString(r)
 		if strings.Contains(body, "<deptcode>") {
 			resp := mapping["mvd1.resp"]
+			fmt.Fprintf(w, resp)
+		} else {
+			fmt.Fprintf(w, "Anything!")
+		}
+	}
+}
+
+func handleMvd2(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		body := readBodyAsString(r)
+		if strings.Contains(body, "<deptcode>") {
+			resp := mapping["mvd2.resp"]
 			fmt.Fprintf(w, resp)
 		}
 	}
@@ -51,19 +60,16 @@ func logHandleRequestInDelta(fn http.HandlerFunc, d_min time.Duration, d_max tim
 		time.Sleep(time.Duration(delta) * time.Second)
 		dumpRequestToLog(r)
 		fn(w, r)
-		Info.Printf("Respond in %s", string(delta))
+		Info.Printf("Respond in %s", delta)
 		Info.Println()
 	}
 }
 
-func readBodyAsXml(req *http.Request) *simplexml.Document {
-	bd, _ := ioutil.ReadAll(req.Body)
-	as_str := string(bd)
-	xml_doc, err := simplexml.NewDocumentFromReader(strings.NewReader(as_str))
-	if err != nil {
-		panic(err)
+func logHandleRequest(fn http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		dumpRequestToLog(r)
+		fn(w, r)
 	}
-	return xml_doc
 }
 
 func readBodyAsString(req *http.Request) string {

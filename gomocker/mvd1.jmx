@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.8" jmeter="2.13 r1665067">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">0.0.0.0</stringProp>
+        <stringProp name="HTTPSampler.port">9090</stringProp>
+        <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+        <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        <stringProp name="HTTPSampler.protocol"></stringProp>
+        <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+        <stringProp name="HTTPSampler.path"></stringProp>
+        <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">500</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1461314259000</longProp>
+        <longProp name="ThreadGroup.end_time">1461314259000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/mvd1" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:pgufg=&quot;http://idecs.atc.ru/pgufg/ws/fgapc/&quot; xmlns=&quot;urn://x-artefacts-it-ru/dob/state-services/road-police/business-data/1.3.1&quot; xmlns:ns1=&quot;urn://x-artefacts-it-ru/dob/poltava/common-types/1.5&quot; xmlns:ns=&quot;urn://x-artefacts-it-ru/dob/poltava/application/types/1.0&quot;&gt;&#xd;
+  &lt;soapenv:Header&gt;&#xd;
+    &lt;wsse:Security xmlns:wsse=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd&quot; xmlns:common=&quot;urn://x-artefacts-it-ru/dob/poltava/common-types/1.5&quot;&gt;&#xd;
+      &lt;wsse:UsernameToken xmlns:wsu=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd&quot; wsu:Id=&quot;UsernameToken-1&quot;&gt;&#xd;
+        &lt;wsse:Username&gt;portal_gosuslugi&lt;/wsse:Username&gt;&#xd;
+        &lt;common:PasswordSaltedDigest Type=&quot;http://www.w3.org/2001/04/xmldsig-more#gostr341194&quot;&gt;76d80224611fc919a5d54f0ff9fba446&lt;/common:PasswordSaltedDigest&gt;&#xd;
+      &lt;/wsse:UsernameToken&gt;&#xd;
+    &lt;/wsse:Security&gt;&#xd;
+  &lt;/soapenv:Header&gt;&#xd;
+  &lt;soapenv:Body&gt;&#xd;
+    &lt;ns:setApplicationRequest&gt;&#xd;
+      &lt;ns:applicationSourceSystemID/&gt;&#xd;
+      &lt;ns:aplicant&gt;&#xd;
+        &lt;ns:aplicantInfo&gt;&#xd;
+          &lt;ns1:personInfo&gt;&#xd;
+            &lt;ns1:personSourceSystemID&gt;1000300689&lt;/ns1:personSourceSystemID&gt;&#xd;
+            &lt;ns1:personLastName&gt;Королевв&lt;/ns1:personLastName&gt;&#xd;
+            &lt;ns1:personFirstName&gt;Алексейй&lt;/ns1:personFirstName&gt;&#xd;
+            &lt;ns1:personPatronymic/&gt;&#xd;
+            &lt;ns1:phone&gt;+7(909)2764354&lt;/ns1:phone&gt;&#xd;
+          &lt;/ns1:personInfo&gt;&#xd;
+        &lt;/ns:aplicantInfo&gt;&#xd;
+      &lt;/ns:aplicant&gt;&#xd;
+      &lt;ns:serviceWithChoosenOptions&gt;&#xd;
+        &lt;ns1:serviceID&gt;142&lt;/ns1:serviceID&gt;&#xd;
+        &lt;ns1:choosenServiceOption&gt;&#xd;
+          &lt;ns1:choosenServiceOptionID&gt;181&lt;/ns1:choosenServiceOptionID&gt;&#xd;
+          &lt;ns1:optionValueID&gt;341&lt;/ns1:optionValueID&gt;&#xd;
+        &lt;/ns1:choosenServiceOption&gt;&#xd;
+        &lt;ns1:choosenServiceOption&gt;&#xd;
+          &lt;ns1:choosenServiceOptionID&gt;182&lt;/ns1:choosenServiceOptionID&gt;&#xd;
+          &lt;ns1:optionValueID&gt;346&lt;/ns1:optionValueID&gt;&#xd;
+        &lt;/ns1:choosenServiceOption&gt;&#xd;
+        &lt;ns1:choosenServiceOption&gt;&#xd;
+          &lt;ns1:choosenServiceOptionID&gt;183&lt;/ns1:choosenServiceOptionID&gt;&#xd;
+          &lt;ns1:optionValueID&gt;349&lt;/ns1:optionValueID&gt;&#xd;
+        &lt;/ns1:choosenServiceOption&gt;&#xd;
+        &lt;ns1:choosenServiceOption&gt;&#xd;
+          &lt;ns1:choosenServiceOptionID&gt;188&lt;/ns1:choosenServiceOptionID&gt;&#xd;
+          &lt;ns1:optionValueID&gt;360&lt;/ns1:optionValueID&gt;&#xd;
+        &lt;/ns1:choosenServiceOption&gt;&#xd;
+        &lt;ns1:choosenServiceOption&gt;&#xd;
+          &lt;ns1:choosenServiceOptionID&gt;184&lt;/ns1:choosenServiceOptionID&gt;&#xd;
+          &lt;ns1:booleanOptionValue&gt;false&lt;/ns1:booleanOptionValue&gt;&#xd;
+        &lt;/ns1:choosenServiceOption&gt;&#xd;
+        &lt;ns1:choosenServiceOption&gt;&#xd;
+          &lt;ns1:choosenServiceOptionID&gt;185&lt;/ns1:choosenServiceOptionID&gt;&#xd;
+          &lt;ns1:booleanOptionValue&gt;false&lt;/ns1:booleanOptionValue&gt;&#xd;
+        &lt;/ns1:choosenServiceOption&gt;&#xd;
+        &lt;ns1:choosenServiceOption&gt;&#xd;
+          &lt;ns1:choosenServiceOptionID&gt;186&lt;/ns1:choosenServiceOptionID&gt;&#xd;
+          &lt;ns1:booleanOptionValue&gt;false&lt;/ns1:booleanOptionValue&gt;&#xd;
+        &lt;/ns1:choosenServiceOption&gt;&#xd;
+        &lt;ns1:choosenServiceOption&gt;&#xd;
+          &lt;ns1:choosenServiceOptionID&gt;187&lt;/ns1:choosenServiceOptionID&gt;&#xd;
+          &lt;ns1:booleanOptionValue&gt;false&lt;/ns1:booleanOptionValue&gt;&#xd;
+        &lt;/ns1:choosenServiceOption&gt;&#xd;
+      &lt;/ns:serviceWithChoosenOptions&gt;&#xd;
+      &lt;ns:departmentID&gt;6359&lt;/ns:departmentID&gt;&#xd;
+      &lt;ns:applicationContent&gt;&#xd;
+        &lt;vehicleRegistrationForm xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&#xd;
+          &lt;registrationType&gt;carOrTruck&lt;/registrationType&gt;&#xd;
+          &lt;owner&gt;&#xd;
+            &lt;personType&gt;physical&lt;/personType&gt;&#xd;
+            &lt;physicalPerson&gt;&#xd;
+              &lt;familyName&gt;Королевв&lt;/familyName&gt;&#xd;
+              &lt;firstName&gt;Алексейй&lt;/firstName&gt;&#xd;
+              &lt;surnameName/&gt;&#xd;
+              &lt;birthDate&gt;1990-11-17&lt;/birthDate&gt;&#xd;
+              &lt;sex&gt;male&lt;/sex&gt;&#xd;
+              &lt;contactPhone&gt;+7(909)2764354&lt;/contactPhone&gt;&#xd;
+              &lt;citizenship&gt;643&lt;/citizenship&gt;&#xd;
+              &lt;countryCode/&gt;&#xd;
+              &lt;bithplace/&gt;&#xd;
+              &lt;idDocumentType&gt;05&lt;/idDocumentType&gt;&#xd;
+              &lt;idDocumentNumber&gt;1111 111111&lt;/idDocumentNumber&gt;&#xd;
+              &lt;idDocumentIssuingDate&gt;2000-05-12&lt;/idDocumentIssuingDate&gt;&#xd;
+              &lt;idDocumentIssuer&gt;УФМС&lt;/idDocumentIssuer&gt;&#xd;
+              &lt;postalcode&gt;150051&lt;/postalcode&gt;&#xd;
+              &lt;countrycode&gt;643&lt;/countrycode&gt;&#xd;
+              &lt;constituentEntity&gt;Ярославская&lt;/constituentEntity&gt;&#xd;
+              &lt;region/&gt;&#xd;
+              &lt;city&gt;Ярославль&lt;/city&gt;&#xd;
+              &lt;settlement/&gt;&#xd;
+              &lt;street&gt;Саукова&lt;/street&gt;&#xd;
+              &lt;apartmentBlock&gt;21&lt;/apartmentBlock&gt;&#xd;
+              &lt;bulk/&gt;&#xd;
+              &lt;building/&gt;&#xd;
+              &lt;flat&gt;221&lt;/flat&gt;&#xd;
+              &lt;INN/&gt;&#xd;
+            &lt;/physicalPerson&gt;&#xd;
+          &lt;/owner&gt;&#xd;
+          &lt;applicant&gt;&#xd;
+            &lt;familyName&gt;Королевв&lt;/familyName&gt;&#xd;
+            &lt;firstName&gt;Алексейй&lt;/firstName&gt;&#xd;
+            &lt;surnameName/&gt;&#xd;
+          &lt;/applicant&gt;&#xd;
+          &lt;vehicle&gt;&#xd;
+            &lt;licensePlateNumber/&gt;&#xd;
+            &lt;licensePlateNumberType/&gt;&#xd;
+            &lt;licensePlateNumberTypeTR/&gt;&#xd;
+            &lt;licensePlateNumberTR/&gt;&#xd;
+            &lt;productionYear&gt;2012&lt;/productionYear&gt;&#xd;
+            &lt;vin&gt;1&lt;/vin&gt;&#xd;
+            &lt;mark&gt;1&lt;/mark&gt;&#xd;
+            &lt;model&gt;1&lt;/model&gt;&#xd;
+            &lt;frameSerial&gt;1&lt;/frameSerial&gt;&#xd;
+            &lt;bodySerial&gt;1&lt;/bodySerial&gt;&#xd;
+            &lt;vehicleType/&gt;&#xd;
+            &lt;engineType/&gt;&#xd;
+            &lt;manufacturer/&gt;&#xd;
+            &lt;category&gt;B&lt;/category&gt;&#xd;
+            &lt;bodyColor/&gt;&#xd;
+            &lt;bodyColorCode/&gt;&#xd;
+            &lt;vehiclePassportNumber&gt; &lt;/vehiclePassportNumber&gt;&#xd;
+            &lt;registeringDocumentType/&gt;&#xd;
+            &lt;haveform/&gt;&#xd;
+            &lt;dovtypehave/&gt;&#xd;
+            &lt;docnamehave/&gt;&#xd;
+            &lt;serianumberhave&gt; &lt;/serianumberhave&gt;&#xd;
+            &lt;agenthave/&gt;&#xd;
+            &lt;serianumberpolis&gt; &lt;/serianumberpolis&gt;&#xd;
+            &lt;agentpolis/&gt;&#xd;
+            &lt;deptcode&gt;&#xd;
+            &lt;/vehicle&gt;&#xd;
+          &lt;fulldate&gt;2015-11-09&lt;/fulldate&gt;&#xd;
+        &lt;/vehicleRegistrationForm&gt;&#xd;
+      &lt;/ns:applicationContent&gt;&#xd;
+    &lt;/ns:setApplicationRequest&gt;&#xd;
+  &lt;/soapenv:Body&gt;&#xd;
+&lt;/soapenv:Envelope&gt;</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/mvd1</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="RA - assert text" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1653496403">&lt;applicationStateTransitionID&gt;8&lt;/applicationStateTransitionID&gt;</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">16</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/" enabled="false">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+      </hashTree>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
