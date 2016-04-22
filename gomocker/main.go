@@ -7,6 +7,7 @@ import (
 	"gomocker/gomocker/utils"
 	"log"
 	"net/http"
+	"os"
 )
 
 var REQ_RESPS_PATH string = "reqResps/"
@@ -20,12 +21,14 @@ func main() {
 	mapping = utils.LoadReqResps(REQ_RESPS_PATH)
 
 	router := http.NewServeMux()
-	router.HandleFunc("/", logHandleRequest(handleGet))
-	router.HandleFunc("/mvd1", logHandleRequest(handleMvd1))
+	router.HandleFunc("/", logHandleRequestStrictIn(handleGet, 1))
+	router.HandleFunc("/mvd1", logHandleRequestInDelta(handleMvd1, 1, 5))
 	http.Handle("/", router)
 
 	fmt.Println("GoMocks v1.0")
 	fmt.Printf("Running on %s:%s", *ip, *port)
+	fmt.Println("")
+	Init_logger(os.Stdout, os.Stdout, os.Stdout, os.Stdout)
 
 	err := http.ListenAndServe(*ip+":"+*port, nil)
 	if err != nil {
