@@ -20,6 +20,7 @@ func LoadReqResps(dir string) map[string]string {
 			}
 			as_string := string(resp)
 			mapping[f.Name()] = as_string
+			Info.Printf("Template loaded: %s", f.Name())
 		}
 	}
 	return mapping

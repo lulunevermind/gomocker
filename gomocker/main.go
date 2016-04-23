@@ -18,13 +18,13 @@ func main() {
 	logs := flag.String("log", "nolog", "stdout or no logs")
 	flag.Parse()
 
-	mapping = LoadReqResps(REQ_RESPS_PATH)
-
 	if *logs == "nolog" {
-		Init_logger(ioutil.Discard, ioutil.Discard, ioutil.Discard, ioutil.Discard)
+		Init_logger(ioutil.Discard, ioutil.Discard)
 	} else {
-		Init_logger(os.Stdout, os.Stdout, os.Stdout, os.Stdout)
+		Init_logger(os.Stdout, os.Stdout)
 	}
+
+	mapping = LoadReqResps(REQ_RESPS_PATH)
 
 	router := http.NewServeMux()
 	router.HandleFunc("/", logHandleRequestStrictIn(handleGet, 1))
