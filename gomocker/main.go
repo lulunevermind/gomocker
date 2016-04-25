@@ -8,6 +8,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/gorilla/mux"
 )
 
 var REQ_RESPS_PATH string = "reqResps/"
@@ -26,17 +28,16 @@ func main() {
 
 	mapping = LoadReqResps(REQ_RESPS_PATH)
 
-	router := http.NewServeMux()
+	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", logHandleRequestStrictIn(handleGet, 1))
 	router.HandleFunc("/mvd1", logHandleRequest(handleMvd1))
 	router.HandleFunc("/mvd2", logHandleRequest(handleMvd2))
-	http.Handle("/", router)
 
 	fmt.Println("GoMocks v1.0")
 	fmt.Printf("Running on %s:%s", "0.0.0.0", *port)
 	fmt.Println("")
 
-	err := http.ListenAndServe(":"+*port, nil)
+	err := http.ListenAndServe(":"+*port, router)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
