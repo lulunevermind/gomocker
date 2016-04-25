@@ -11,31 +11,15 @@ import (
 )
 
 func handleGet(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		resp := "SimpleMockServer v.1.0"
-		fmt.Fprintf(w, resp)
-	}
+	resp := "SimpleMockServer v.1.0"
+	fmt.Fprintf(w, resp)
 }
 
 func handleMvd1(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "POST" {
-		body := readBodyAsString(r)
-		if strings.Contains(body, "<deptcode>") {
-			resp := mapping["mvd1.resp"]
-			fmt.Fprintf(w, resp)
-		} else {
-			fmt.Fprintf(w, "Anything!")
-		}
-	}
-}
-
-func handleMvd2(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "POST" {
-		body := readBodyAsString(r)
-		if strings.Contains(body, "<deptcode>") {
-			resp := mapping["mvd2.resp"]
-			fmt.Fprintf(w, resp)
-		}
+	body := readBodyAsString(r)
+	if strings.Contains(body, w.(DumpResponseWriter).tag) {
+		resp := mapping[w.(DumpResponseWriter).template]
+		fmt.Fprintf(w, resp)
 	}
 }
 
@@ -65,10 +49,13 @@ func logHandleRequestInDelta(fn http.HandlerFunc, d_min time.Duration, d_max tim
 	}
 }
 
-func logHandleRequest(fn http.HandlerFunc) http.HandlerFunc {
+func logHandleRequest(fn http.HandlerFunc, tag string, template string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		dumpRequestToLog(r)
-		fn(w, r)
+		dumpRespWriter := DumpResponseWriter{w, template, tag}
+		Info.Println("TAG -->> ", tag)
+		Info.Println("TEMPLATE -->> ", template)
+		fn(dumpRespWriter, r)
 	}
 }
 

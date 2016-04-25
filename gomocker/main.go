@@ -28,10 +28,9 @@ func main() {
 
 	mapping = LoadReqResps(REQ_RESPS_PATH)
 
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/", logHandleRequestStrictIn(handleGet, 1))
-	router.HandleFunc("/mvd1", logHandleRequest(handleMvd1))
-	router.HandleFunc("/mvd2", logHandleRequest(handleMvd2))
+	router := mux.NewRouter()
+	router.HandleFunc("/", logHandleRequestStrictIn(handleGet, 1)).Methods("GET")
+	router.HandleFunc("/mvd1", logHandleRequest(handleMvd1, "<deptcode>", "mvd1.resp")).Methods("POST")
 
 	fmt.Println("GoMocks v1.0")
 	fmt.Printf("Running on %s:%s", "0.0.0.0", *port)
