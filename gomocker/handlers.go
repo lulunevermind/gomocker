@@ -49,7 +49,7 @@ func logHandleRequestInDelta(fn http.HandlerFunc, d_min time.Duration, d_max tim
 	}
 }
 
-func logHandleRequest(fn http.HandlerFunc, tag string, template string) http.HandlerFunc {
+func handleByTagWithTemplateLogged(fn http.HandlerFunc, tag string, template string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		dumpRequestToLog(r)
 		dumpRespWriter := DumpResponseWriter{w, template, tag}
