@@ -15,7 +15,7 @@ func handleGet(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, resp)
 }
 
-func handleMvd1(w http.ResponseWriter, r *http.Request) {
+func ByContainsTag(w http.ResponseWriter, r *http.Request) {
 	body := readBodyAsString(r)
 	if strings.Contains(body, w.(DumpResponseWriter).tag) {
 		resp := mapping[w.(DumpResponseWriter).template]
