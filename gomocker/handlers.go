@@ -8,6 +8,8 @@ import (
 	"net/http/httputil"
 	"strings"
 	"time"
+
+	"github.com/jteeuwen/go-pkg-xmlx"
 )
 
 func handleGet(w http.ResponseWriter, r *http.Request) {
@@ -15,9 +17,24 @@ func handleGet(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, resp)
 }
 
-func ByContainsTag(w http.ResponseWriter, r *http.Request) {
+func ByContainsString(w http.ResponseWriter, r *http.Request) {
 	body := readBodyAsString(r)
 	if strings.Contains(body, w.(DumpResponseWriter).tag) {
+		resp := mapping[w.(DumpResponseWriter).template]
+		fmt.Fprintf(w, resp)
+	}
+}
+
+func ByXmlTagExists(w http.ResponseWriter, r *http.Request) {
+	doc := xmlx.New()
+	body := readBodyAsString(r)
+	err := doc.LoadString(body, nil)
+	if err != nil {
+		panic(err)
+	}
+	node := doc.SelectNode("*", w.(DumpResponseWriter).tag)
+
+	if node != nil {
 		resp := mapping[w.(DumpResponseWriter).template]
 		fmt.Fprintf(w, resp)
 	}
@@ -49,7 +66,7 @@ func logHandleRequestInDelta(fn http.HandlerFunc, d_min time.Duration, d_max tim
 	}
 }
 
-func handleByTagWithTemplateLogged(fn http.HandlerFunc, tag string, template string) http.HandlerFunc {
+func handleWithTemplateBy(fn http.HandlerFunc, tag string, template string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		dumpRequestToLog(r)
 		dumpRespWriter := DumpResponseWriter{w, template, tag}
