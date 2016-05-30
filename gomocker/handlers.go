@@ -25,6 +25,29 @@ func ByContainsString(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func GIBDD_simple_n_full(w http.ResponseWriter, r *http.Request) {
+	body := readBodyAsString(r)
+	if strings.Contains(body, "<dob:usrF>Èâàíîâ2</dob:usrF>") {
+		resp := mapping["mvd_full.resp"]
+		fmt.Fprintf(w, resp)
+	}
+	if strings.Contains(body, "<dob:usrF>simple</dob:usrF>") {
+		resp := mapping["mvd_simple.resp"]
+		fmt.Fprintf(w, resp)
+	}
+}
+
+func FNS_LCBFindInfo_SendQINNNFL(w http.ResponseWriter, r *http.Request) {
+	body := readBodyAsString(r)
+	if strings.Contains(body, "<rq:inn>") {
+		resp := mapping["fns_lcbfindinfo.resp"]
+		fmt.Fprintf(w, resp)
+	} else {
+		resp := mapping["fns_qinn.resp"]
+		fmt.Fprintf(w, resp)
+	}
+}
+
 func ByXmlTagExists(w http.ResponseWriter, r *http.Request) {
 	doc := xmlx.New()
 	body := readBodyAsString(r)
@@ -69,9 +92,19 @@ func logHandleRequestInDelta(fn http.HandlerFunc, d_min time.Duration, d_max tim
 func handleWithTemplateBy(fn http.HandlerFunc, tag string, template string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		dumpRequestToLog(r)
+		w.Header().Set("Content-type", "text/xml; charset=utf-8")
 		dumpRespWriter := DumpResponseWriter{w, template, tag}
 		Info.Println("TAG -->> ", tag)
 		Info.Println("TEMPLATE -->> ", template)
+		fn(dumpRespWriter, r)
+	}
+}
+
+func handleWithCustomHandler(fn http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		dumpRequestToLog(r)
+		w.Header().Set("Content-type", "text/xml; charset=utf-8")
+		dumpRespWriter := DumpResponseWriter{w, "", ""}
 		fn(dumpRespWriter, r)
 	}
 }
